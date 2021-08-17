@@ -10,13 +10,14 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// 手动同步接口
 func SyncFunc(c *gin.Context) {
 	env := c.DefaultQuery("env", "all")
 	appName := c.Query("app")
 	mod := c.Query("mod")
 	ipList, err := util.Getip(&env, &appName)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"msg": "get ip from cmdb failed"})
+		c.JSON(http.StatusInternalServerError, gin.H{"msg": "get ip from cmdb failed:" + err.Error()})
 	}
 	srcPath := fmt.Sprintf("%s/%s/%s/%s/", config.Config.RepoDir, mod, env, appName)
 	config.Logger.Infof("[Sync info]mod:%s;env:%s;app:%s;iplist:%s", mod, env, appName, ipList)

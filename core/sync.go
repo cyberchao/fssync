@@ -6,7 +6,7 @@ import (
 )
 
 func SyncCron(srcPath, ip *string) {
-	err := exec.Command("/usr/bin/rsync", "-avz", "--timeout=3", "--owner=wls81", "--group=wls", *srcPath, "root@"+*ip+":/").Run()
+	err := exec.Command("/usr/bin/rsync", "-avz", "--timeout="+config.Config.Timeout, "--owner="+config.Config.Owner, "--group="+config.Config.Group, *srcPath, *ip+":/").Run()
 	if err != nil {
 		config.Logger.Errorf("Rsync error:[%s]-[%s]-[%s]", *srcPath, *ip, err.Error())
 	} else {
@@ -15,9 +15,8 @@ func SyncCron(srcPath, ip *string) {
 }
 
 func SyncHttp(srcPath, ip *string, ch chan string) {
-	out, err := exec.Command("/usr/bin/rsync", "-avz", "--timeout=3", "--owner=wls81", "--group=wls", *srcPath, "root@"+*ip+":/").Output()
+	out, err := exec.Command("/usr/bin/rsync", "-avz", "--timeout="+config.Config.Timeout, "--owner="+config.Config.Owner, "--group="+config.Config.Group, *srcPath, *ip+":/").Output()
 	if err != nil {
-		config.Logger.Infof("Rsync error:%s", out)
 		config.Logger.Errorf("Rsync error:[%s]-[%s]-[%s]", *srcPath, *ip, err.Error())
 		ch <- *ip + ":" + string(out)
 	} else {
