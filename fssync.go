@@ -2,6 +2,7 @@ package main
 
 import (
 	"fssync/api"
+	"fssync/config"
 	mycron "fssync/cron"
 	"fssync/logger"
 
@@ -9,6 +10,7 @@ import (
 )
 
 func main() {
+	config.VP = config.Viper("./config.yaml")
 	logger.InitLogger()
 	// mycron.Worker()
 	mycron.Cron()

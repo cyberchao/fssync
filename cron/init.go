@@ -10,7 +10,7 @@ import (
 func Cron() {
 	cron := cron.New()
 
-	cron.AddFunc(fmt.Sprintf("@every %ss", config.Interval), func() {
+	cron.AddFunc(fmt.Sprintf("@every %ss", config.Config.Interval), func() {
 		config.Logger.Infof("start cron")
 		Worker()
 		config.Logger.Infof("end cron")

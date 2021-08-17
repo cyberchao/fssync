@@ -18,7 +18,7 @@ func SyncFunc(c *gin.Context) {
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"msg": "get ip from cmdb failed"})
 	}
-	srcPath := fmt.Sprintf("%s/%s/%s/%s/", config.RepoDir, mod, env, appName)
+	srcPath := fmt.Sprintf("%s/%s/%s/%s/", config.Config.RepoDir, mod, env, appName)
 	config.Logger.Infof("[Sync info]mod:%s;env:%s;app:%s;iplist:%s", mod, env, appName, ipList)
 
 	ch := make(chan string, len(ipList))

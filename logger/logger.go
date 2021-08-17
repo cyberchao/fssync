@@ -26,7 +26,7 @@ func getEncoder() zapcore.Encoder {
 
 func getLogWriter() zapcore.WriteSyncer {
 	lumberJackLogger := &lumberjack.Logger{
-		Filename: config.Logfile,
+		Filename: config.Config.Logfile,
 		Compress: false,
 	}
 	return zapcore.AddSync(lumberJackLogger)

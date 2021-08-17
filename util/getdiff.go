@@ -10,7 +10,7 @@ import (
 
 // 获取与上个版本有差异的文件列表
 func GetDiffFile() ([]string, error) {
-	os.Chdir(config.RepoDir)
+	os.Chdir(config.Config.RepoDir)
 	cmd := exec.Command("git", "pull", "origin", "main")
 	var out bytes.Buffer
 	var stderr bytes.Buffer

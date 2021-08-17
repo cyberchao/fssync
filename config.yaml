@@ -1,0 +1,21 @@
+# 工作目录
+workdir: "/Users/pangru/Documents/golang/fssync/"
+
+# 日志文件
+logfile: "/Users/pangru/Documents/golang/fssync/syncer.log"
+
+# 本地git库目录
+repodir: "/Users/pangru/Documents/golang/fssync/serverfiles"
+
+# 执行任务间隔
+interval: "3"
+
+# rsync建立连接超时时间
+timeout: "3"
+
+# 远端文件属主
+owner: "wls81"
+group: "wls"
+
+# 筛选环境
+env: "prod,hd,uat,shy"

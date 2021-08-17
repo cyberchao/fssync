@@ -21,7 +21,7 @@ func Worker() {
 		dirs := strings.Split(file, "/")
 		if len(dirs) > 3 {
 			mod, env, appName := dirs[0], dirs[1], dirs[2]
-			srcPath := fmt.Sprintf("%s/%s/%s/%s/", config.RepoDir, mod, env, appName)
+			srcPath := fmt.Sprintf("%s/%s/%s/%s/", config.Config.RepoDir, mod, env, appName)
 
 			if !util.Contains(&src, &srcPath) {
 				src = append(src, srcPath)
