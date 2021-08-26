@@ -12,7 +12,7 @@ import (
 
 // 手动同步接口
 func SyncFunc(c *gin.Context) {
-	env := c.DefaultQuery("env", "all")
+	env := c.DefaultQuery("zone", "all")
 	appName := c.Query("app")
 	mod := c.Query("mod")
 	ipList, err := util.Getip(&env, &appName)

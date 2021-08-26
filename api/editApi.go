@@ -15,7 +15,7 @@ import (
 )
 
 // 发布平台可以通过此接口修改配置文件
-func EditFunc(c *gin.Context) {
+func ModifyFunc(c *gin.Context) {
 	var requestData Request
 	if err := c.BindJSON(&requestData); err != nil {
 		c.JSON(http.StatusOK, gin.H{"status": "false", "msg": "data struct error:" + err.Error()})

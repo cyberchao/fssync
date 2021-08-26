@@ -7,13 +7,14 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+
 	"github.com/gin-gonic/gin"
 )
 
 // 手动同步接口
 func GetFileFunc(c *gin.Context) {
 	appName := c.Query("app")
-	zone := c.Query("env")
+	zone := c.Query("zone")
 	if appName == "" || zone == "" {
 		c.JSON(http.StatusOK, gin.H{
 			"status": "false",

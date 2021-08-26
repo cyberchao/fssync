@@ -18,11 +18,11 @@ func main() {
 	router := gin.Default()
 	// k8s通过此静态文件下载服务下载配置文件
 	router.Use(static.Serve("/", static.LocalFile(config.Config.RepoDir+"/env", true)))
-	// 手动同步接口
+	// 获取文件列表
 	router.GET("/getfile", api.GetFileFunc)
-	// 手动同步接口
+	// 手动同步
 	router.GET("/sync", api.SyncFunc)
-	// 配置修改接口
-	router.POST("/edit", api.EditFunc)
+	// 配置修改
+	router.POST("/modify", api.ModifyFunc)
 	router.Run(":8080")
 }
