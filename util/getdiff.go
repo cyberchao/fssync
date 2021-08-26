@@ -22,9 +22,10 @@ func GetDiffFile() ([]string, error) {
 		config.Logger.Errorf("git pull error:%s:%s", err, stderr.String())
 		return nil, err
 	} else {
-		config.Logger.Info("git pull: " + strings.Trim(out.String(), "\n"))
+
 		// 判断是否有更新
 		if !strings.Contains(out.String(), "Already up to date") {
+			config.Logger.Info("git pull: " + strings.Trim(out.String(), "\n"))
 			// git log -p -1 --oneline 获取最近一次更新的详细内容变化
 			out, _ := exec.Command("git", "diff", "head^", "--name-only").Output()
 			files := strings.Split(strings.Trim(string(out), "\n"), "\n")

@@ -21,11 +21,12 @@ func ModifyFunc(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{"status": "false", "msg": "data struct error:" + err.Error()})
 		return
 	}
-	msg, err := Edit(requestData)
+	msg, err := Modify(requestData)
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{"status": "false", "msg": "edit error:" + err.Error()})
 		return
 	}
+
 	c.JSON(http.StatusOK, gin.H{
 		"status": "true",
 		"msg":    msg,
@@ -41,7 +42,7 @@ type Request struct {
 	Datas    map[string]string `json:"datas"`
 }
 
-func Edit(requestData Request) (string, error) {
+func Modify(requestData Request) (string, error) {
 	os.Chdir(config.Config.Easypub)
 	cmd := exec.Command("git", "pull", "origin", "main")
 	var out bytes.Buffer
@@ -91,7 +92,6 @@ func Edit(requestData Request) (string, error) {
 					} else {
 						return "", errors.New("operation error")
 					}
-
 				}
 			}
 		}
@@ -100,6 +100,32 @@ func Edit(requestData Request) (string, error) {
 	output := strings.Join(lines, "\n")
 	err = ioutil.WriteFile(filePath, []byte(output), perm)
 	if err != nil {
+		exec.Command("git", "reset", "--hard").Run()
+		return "", err
+	}
+	os.Chdir(config.Config.Easypub)
+	cmd = exec.Command("git", "add", "./*")
+	cmd.Stdout, cmd.Stderr = &out, &stderr
+	err = cmd.Run()
+	if err != nil {
+		config.Logger.Errorf("git add error:%s:%s:%s", err, stderr.String(), out.String())
+		exec.Command("git", "reset", "--hard").Run()
+		return "", err
+	}
+	cmd = exec.Command("git", "commit", "-m", " easypub")
+	cmd.Stdout, cmd.Stderr = &out, &stderr
+	err = cmd.Run()
+	if err != nil {
+		config.Logger.Errorf("git commit error:%s:%s:%s", err, stderr.String(), out.String())
+		exec.Command("git", "reset", "--hard").Run()
+		return "", err
+	}
+	cmd = exec.Command("git", "push")
+	cmd.Stdout, cmd.Stderr = &out, &stderr
+	err = cmd.Run()
+	if err != nil {
+		config.Logger.Errorf("git push error:%s:%s", err, stderr.String())
+		exec.Command("git", "reset", "--hard").Run()
 		return "", err
 	}
 	return "success", nil
