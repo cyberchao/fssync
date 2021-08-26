@@ -9,6 +9,7 @@ type Para struct {
 	Workdir  string `json:"workdir" yaml:"workdir"`
 	Logfile  string `json:"logfile" yaml:"logfile"`
 	RepoDir  string `json:"repodir" yaml:"repodir"`
+	Easypub  string `json:"easypub" yaml:"easypub"`
 	Interval string `json:"interval" yaml:"interval"`
 	Timeout  string `json:"timeout" yaml:"timeout"`
 	Owner    string `json:"owner" yaml:"owner"`

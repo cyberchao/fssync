@@ -33,7 +33,7 @@ func Worker() {
 				}
 				config.Logger.Infof("[Sync info]src:%s;mod:%s;env:%s;app:%s;iplist:%s", srcPath, mod, env, appName, ipList)
 				for _, ip := range ipList {
-					go core.SyncCron(&srcPath, &ip)
+					go core.SyncCron(srcPath, ip)
 				}
 			}
 		}

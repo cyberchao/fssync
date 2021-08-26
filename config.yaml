@@ -7,6 +7,9 @@ logfile: "/Users/pangru/Documents/golang/fssync/syncer.log"
 # 本地git库目录
 repodir: "/Users/pangru/Documents/golang/fssync/serverfiles"
 
+# 本地easypub git库目录
+easypub: "/Users/pangru/Documents/golang/fssync/serverfiles"
+
 # 执行任务间隔
 interval: "3"
 

@@ -24,7 +24,7 @@ func SyncFunc(c *gin.Context) {
 
 	ch := make(chan string, len(ipList))
 	for _, ip := range ipList {
-		go core.SyncHttp(&srcPath, &ip, ch)
+		go core.SyncHttp(srcPath, ip, ch)
 	}
 	var resp []string
 	for i := 0; i < len(ipList); i++ {
