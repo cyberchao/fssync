@@ -22,14 +22,14 @@ func Worker() {
 		dirs := strings.Split(file, "/")
 		if len(dirs) > 3 {
 			mod, env, appName := dirs[0], dirs[1], dirs[2]
-			srcPath := fmt.Sprintf("%s/%s/%s/%s/", config.Config.RepoDir, mod, env, appName)
 
-			if env == "bx" || env == "wgq" {
-				env = "prod"
-			}
+			srcPath := fmt.Sprintf("%s/%s/%s/%s/", config.Config.RepoDir, mod, env, appName)
 
 			if !util.Contains(&src, &srcPath) {
 				src = append(src, srcPath)
+				if env == "bx" || env == "wgq" {
+					env = "prod"
+				}
 				ipList, err := util.Getip(&env, &appName)
 				if err != nil {
 					config.Logger.Error("Get ip error:", err.Error())
