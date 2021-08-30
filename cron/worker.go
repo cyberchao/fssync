@@ -24,6 +24,10 @@ func Worker() {
 			mod, env, appName := dirs[0], dirs[1], dirs[2]
 			srcPath := fmt.Sprintf("%s/%s/%s/%s/", config.Config.RepoDir, mod, env, appName)
 
+			if env == "bx" || env == "wgq" {
+				env = "prod"
+			}
+
 			if !util.Contains(&src, &srcPath) {
 				src = append(src, srcPath)
 				ipList, err := util.Getip(&env, &appName)
