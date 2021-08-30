@@ -19,6 +19,3 @@ timeout: "3"
 # 远端文件属主
 owner: "wls81"
 group: "wls"
-
-# 筛选环境
-env: "prod,hd,uat,shy"

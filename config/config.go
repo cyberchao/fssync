@@ -14,7 +14,6 @@ type Para struct {
 	Timeout  string `json:"timeout" yaml:"timeout"`
 	Owner    string `json:"owner" yaml:"owner"`
 	Group    string `json:"group" yaml:"group"`
-	Env      string `json:"env" yaml:"env"`
 }
 
 var (
