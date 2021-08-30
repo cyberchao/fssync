@@ -42,6 +42,10 @@ type Request struct {
 	Datas    map[string]string `json:"datas"`
 }
 
+// type Request struct {
+// 	Msg []ModifyData
+// }
+
 func Modify(requestData Request) (string, error) {
 	os.Chdir(config.Config.Easypub)
 	cmd := exec.Command("git", "pull", "origin", "main")

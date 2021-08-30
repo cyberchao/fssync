@@ -12,7 +12,7 @@ import (
 
 // 手动同步接口
 func SyncFunc(c *gin.Context) {
-	env := c.DefaultQuery("zone", "all")
+	env := c.Query("zone")
 	appName := c.Query("app")
 	mod := c.Query("mod")
 	ipList, err := util.Getip(&env, &appName)
@@ -26,6 +26,7 @@ func SyncFunc(c *gin.Context) {
 	for _, ip := range ipList {
 		go core.SyncHttp(srcPath, ip, ch)
 	}
+	
 	var resp []string
 	for i := 0; i < len(ipList); i++ {
 		r := <-ch
