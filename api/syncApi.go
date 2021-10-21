@@ -20,13 +20,14 @@ func SyncFunc(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{"msg": "get ip from cmdb failed:" + err.Error()})
 	}
 	srcPath := fmt.Sprintf("%s/%s/%s/%s/", config.Config.RepoDir, mod, env, appName)
+	
 	config.Logger.Infof("[Sync info]mod:%s;env:%s;app:%s;iplist:%s", mod, env, appName, ipList)
 
 	ch := make(chan string, len(ipList))
 	for _, ip := range ipList {
 		go core.SyncHttp(srcPath, ip, ch)
 	}
-	
+
 	var resp []string
 	for i := 0; i < len(ipList); i++ {
 		r := <-ch

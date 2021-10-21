@@ -24,5 +24,6 @@ func main() {
 	router.GET("/sync", api.SyncFunc)
 	// 配置修改
 	router.POST("/modify", api.ModifyFunc)
+	router.GET("/api/get_filelist/", api.Getk8sFileFunc)
 	router.Run(":8080")
 }

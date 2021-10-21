@@ -16,6 +16,7 @@ func Worker() {
 	} else if diffFiles != nil {
 		config.Logger.Info("get files:", diffFiles)
 	}
+	
 	// 按文件路径信息执行同步
 	for _, file := range diffFiles {
 		config.Logger.Infof("Start sync file:%s", file)

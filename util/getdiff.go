@@ -22,7 +22,6 @@ func GetDiffFile() ([]string, error) {
 		config.Logger.Errorf("git pull error:%s:%s", err, stderr.String())
 		return nil, err
 	} else {
-
 		// 判断是否有更新
 		if !strings.Contains(out.String(), "Already up to date") {
 			config.Logger.Info("git pull: " + strings.Trim(out.String(), "\n"))
